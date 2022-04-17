@@ -1,7 +1,7 @@
 # Tugas Besar III IF2211 Strategi Algoritma
 
 > Penerapan String Matching dan Regular Expression dalam DNA Pattern Matching.
-> Live demo [_here_](https://www.example.com).
+> Live demo [_here_](https://dna.kentang.fun).
 
 ## Table of Contents
 
