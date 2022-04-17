@@ -1,7 +1,6 @@
-package main
+package backend
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -40,11 +39,4 @@ func booyerMoore(pattern string, text string) int {
 		}
 	}
 	return -1
-}
-
-func main() {
-	var text string = "THIS IS A TEST TEXT"
-	var pattern string = "TEST"
-	var result int = booyerMoore(pattern, text)
-	fmt.Println(result)
 }
