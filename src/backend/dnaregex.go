@@ -4,7 +4,7 @@ import (
 	"regexp"
 )
 
-func isValid(pattern string) bool {
+func IsValid(pattern string) bool {
 	var onlyAGCT, _ = regexp.Compile("^[AGCT]+$")
 	var isMatch = onlyAGCT.MatchString(pattern)
 	return isMatch

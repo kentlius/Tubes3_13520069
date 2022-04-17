@@ -4,7 +4,7 @@ import (
 	"math"
 )
 
-func getLastOccurrence(pattern string) [128]int {
+func GetLastOccurrence(pattern string) [128]int {
 	var lastOccurrence [128]int
 	for i := 0; i < 128; i++ {
 		lastOccurrence[i] = -1
@@ -15,8 +15,8 @@ func getLastOccurrence(pattern string) [128]int {
 	return lastOccurrence
 }
 
-func booyerMoore(pattern string, text string) int {
-	lastOccurrence := getLastOccurrence(pattern)
+func BooyerMoore(pattern string, text string) int {
+	lastOccurrence := GetLastOccurrence(pattern)
 	n := len(text)
 	m := len(pattern)
 	if m > n {
