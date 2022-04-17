@@ -56,10 +56,11 @@ export default function AddSickness() {
           />
         </div>
         <button
+          className="border-2 border-black"
           onClick={async () => {
             await axios.post(`/api/user`, {
               date: date,
-              name: sickness,
+              name: name,
               dna: dna,
               sickness: sickness,
               percentage: percentage,
@@ -76,6 +77,7 @@ export default function AddSickness() {
           </p>
         </div>
         <button
+          className="border-2 border-black"
           onClick={async () => {
             const { data } = await axios.get(`/api/user`);
             setResults(data.results);

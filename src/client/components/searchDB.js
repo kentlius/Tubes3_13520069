@@ -16,6 +16,12 @@ export default function SearchDB() {
   return (
     <div className="py-0 px-[2rem]">
       <main className="flex flex-col items-center justify-center flex-1 min-h-screen py-[4rem] px-0">
+        <button className="border-2 border-black">
+          <a href="/sickness">Add Sickness</a>
+        </button>
+        <button className="border-2 border-black">
+          <a href="/test">Test DNA</a>
+        </button>
         <h1 className="text-3xl m-0 text-center">Search Database</h1>
         <div className="search">
           <input

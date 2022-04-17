@@ -31,12 +31,13 @@ export default function AddSickness() {
               const reader = new FileReader();
               reader.onload = (e) => {
                 setDna(e.target.result);
-              }
+              };
               reader.readAsText(e.target.files[0]);
             }}
           />
         </div>
         <button
+          className="border-2 border-black"
           onClick={async () => {
             await axios.post(`/api/sickness`, {
               name: sickness,
@@ -47,6 +48,7 @@ export default function AddSickness() {
           Submit
         </button>
         <button
+          className="border-2 border-black"
           onClick={async () => {
             const { data } = await axios.get(`/api/sickness`);
             setResults(data.results);
