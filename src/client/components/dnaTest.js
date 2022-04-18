@@ -13,6 +13,7 @@ export default function AddSickness() {
   const [sickness, setSickness] = useState("");
   const [percentage, setPercentage] = useState(0);
   const [isSick, setIsSick] = useState(false);
+  const [isDNA, setIsDNA] = useState(false);
 
   return (
     <div className="py-0 px-[2rem]">
@@ -27,6 +28,7 @@ export default function AddSickness() {
             name="name"
             placeholder="Your Name"
             onChange={(e) => setName(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -38,10 +40,17 @@ export default function AddSickness() {
             onChange={(e) => {
               const reader = new FileReader();
               reader.onload = (e) => {
-                setDna(e.target.result);
+                if (RegExp(/^[ATCG]+$/).test(e.target.result)) {
+                  setIsDNA(true);
+                  setDna(e.target.result);
+                } else {
+                  setIsDNA(false);
+                  alert("File must be in DNA format");
+                }
               };
               reader.readAsText(e.target.files[0]);
             }}
+            required
           />
         </div>
         <div>
@@ -53,20 +62,25 @@ export default function AddSickness() {
             name="sickness"
             placeholder="Sickness Name"
             onChange={(e) => setSickness(e.target.value)}
+            required
           />
         </div>
         <button
           className="border-2 border-black"
-          onClick={async () => {
-            await axios.post(`/api/user`, {
-              date: date,
-              name: name,
-              dna: dna,
-              sickness: sickness,
-              percentage: percentage,
-              isSick: isSick,
-            });
-          }}
+          onClick={
+            isDNA
+              ? async () => {
+                  await axios.post(`/api/user`, {
+                    date: date,
+                    name: name,
+                    dna: dna,
+                    sickness: sickness,
+                    percentage: percentage,
+                    isSick: isSick,
+                  });
+                }
+              : () => alert("File must be in DNA format")
+          }
         >
           Submit
         </button>
