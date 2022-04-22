@@ -51,12 +51,21 @@
   cd src/server
   ```
 
+- Database
+  - using docker
+    ```sh
+    cd src/server
+    docker compose up -d
+    cp .env.example .env
+    ```
+  - or download [PostgreSQL](https://www.postgresql.org/download/) then setup .env file
+
 ## Usage
 
 1. Run Backend
 
 ```sh
-go run main.go
+go run cmd/main.go
 ```
 
 2. Run Frontend
