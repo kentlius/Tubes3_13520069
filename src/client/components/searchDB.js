@@ -7,8 +7,13 @@ export default function SearchDB() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get(`/api/user?name=${query}`);
-      setResults(data.results);
+      try {
+        const { data } = await axios.get(`/api/user?name=${query}`);
+        setResults(data.results);
+      } catch (error) {
+        console.log(error);
+      }
+      
     };
     fetchData();
   }, [query]);
@@ -40,7 +45,12 @@ export default function SearchDB() {
               <h1 className="text-2xl m-0 text-center">No Results</h1>
             </div>
           ) : (
-            results?.map((result) => (
+            results?.filter((val) => {
+              if (query.length < 3) {
+              return;
+            } else if (val.name.toLowerCase().includes(query.toLowerCase())) {
+              return val;
+            }}).map((result) => (
               <div
                 className="border-2 border-black border-dashed mt-3"
                 key={result.id}
