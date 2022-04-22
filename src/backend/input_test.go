@@ -35,3 +35,13 @@ func TestCombine(t *testing.T) {
 		t.Error("Test Combine 2 failed")
 	}
 }
+
+func TestSimilarity(t *testing.T) {
+	if countSimilarity("TEST", "THIS IS A TEST TEXT") != 100 {
+		t.Error("Test Similarity 1 failed")
+	}
+
+	if countSimilarity("TESST", "THIS IS A TEST TEXT") != 60 {
+		t.Error("Test Similarity 2 failed")
+	}
+}
