@@ -7,4 +7,6 @@ type User struct {
 	Prediction string `json:"prediction"`
 	Percentage int    `json:"percentage"`
 	IsSick     bool   `json:"isSick"`
+	DNA        string `json:"dna"`
+	Method     string `json:"method"`
 }
