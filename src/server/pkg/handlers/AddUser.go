@@ -27,7 +27,7 @@ func (h handler) AddUser(w http.ResponseWriter, r *http.Request) {
 		user.Percentage = 100
 	} else {
 		user.Percentage = countSimilarity(user.DNA, dnaPenyakit)
-		if user.Percentage > 80 {
+		if user.Percentage >= 80 {
 			user.IsSick = true
 		} else {
 			user.IsSick = false

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function AddSickness() {
+export default function DNATest() {
   const [results, setResults] = useState([]);
   const date = new Intl.DateTimeFormat("id-ID", {
     day: "numeric",
@@ -10,9 +10,8 @@ export default function AddSickness() {
   }).format(new Date());
   const [name, setName] = useState("");
   const [dna, setDna] = useState("");
-  const [sickness, setSickness] = useState("");
-  const [percentage, setPercentage] = useState(0);
-  const [isSick, setIsSick] = useState(false);
+  const [prediction, setPrediction] = useState("");
+  const [method, setMethod] = useState("Boyer-Moore");
   const [isDNA, setIsDNA] = useState(false);
 
   return (
@@ -57,14 +56,28 @@ export default function AddSickness() {
           <p>Sickness Prediction:</p>
           <input
             className="border-2 border-black"
-            value={sickness}
+            value={prediction}
             type="text"
-            name="sickness"
-            placeholder="Sickness Name"
-            onChange={(e) => setSickness(e.target.value)}
+            name="prediction"
+            placeholder="Sickness Prediction"
+            onChange={(e) => setPrediction(e.target.value)}
             required
           />
         </div>
+        <input
+          type="radio"
+          name="method"
+          value={method}
+          onChange={() => setMethod("Boyer-Moore")}
+        />
+        <label>Booyer-Moore</label>
+        <input
+          type="radio"
+          name="method"
+          value={method}
+          onChange={() => setMethod("Knuth-Morris-Pratt")}
+        />
+        <label>Knuth-Morris-Pratt</label>
         <button
           className="border-2 border-black"
           onClick={
@@ -74,9 +87,8 @@ export default function AddSickness() {
                     date: date,
                     name: name,
                     dna: dna,
-                    sickness: sickness,
-                    percentage: percentage,
-                    isSick: isSick,
+                    prediction: prediction,
+                    method: method,
                   });
                 }
               : () => alert("File must be in DNA format")
@@ -87,7 +99,7 @@ export default function AddSickness() {
         <div className="border-t-2 border-black border-dashed ">
           <h1 className="text-2xl m-0 text-center">Test Result</h1>
           <p>
-            {date} - {name} - {sickness} - {percentage} - {isSick.toString()}
+            {date} - {name} - {prediction} - {method}
           </p>
         </div>
         <button
@@ -103,7 +115,7 @@ export default function AddSickness() {
           {results.map((result) => {
             return (
               <div key={result.id}>
-                {result.date} - {result.name} - {result.sickness} -{" "}
+                {result.date} - {result.name} - {result.prediction} -{" "}
                 {result.percentage} - {result.isSick.toString()}
               </div>
             );

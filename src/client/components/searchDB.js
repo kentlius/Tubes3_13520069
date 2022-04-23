@@ -15,7 +15,7 @@ export default function SearchDB() {
       }
     };
     fetchData();
-  }, [query]);
+  }, []);
 
   return (
     <div className="py-0 px-[2rem]">
@@ -59,7 +59,7 @@ export default function SearchDB() {
                   className="border-2 border-black border-dashed mt-3"
                   key={result.id}
                 >
-                  {result.date} - {result.name} - {result.sickness} -{" "}
+                  {result.date} - {result.name} - {result.prediction} -{" "}
                   {result.percentage}% - {result.isSick.toString()}
                 </div>
               ))
