@@ -9,7 +9,7 @@ export default function SearchDB() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`api/user`);
-        setResults(data.result);
+        setResults(data.results);
       } catch (error) {
         console.log(error);
       }
