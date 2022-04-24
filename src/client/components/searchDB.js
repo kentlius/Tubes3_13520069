@@ -8,9 +8,8 @@ export default function SearchDB() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:4000/users`);
+        const { data } = await axios.get(`${process.env.API_URL}/users`);
         setResults(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
