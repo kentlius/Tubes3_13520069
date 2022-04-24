@@ -8,7 +8,7 @@ export default function SearchDB() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${process.env.API_URL}/users`);
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
         setResults(data);
       } catch (error) {
         console.log(error);

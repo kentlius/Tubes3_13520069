@@ -83,7 +83,7 @@ export default function DNATest() {
           onClick={
             isDNA
               ? async () => {
-                  await axios.post(`${process.env.API_URL}/users`, {
+                  await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
                     date: date,
                     name: name,
                     dna: dna,
@@ -105,7 +105,7 @@ export default function DNATest() {
         <button
           className="border-2 border-black"
           onClick={async () => {
-            const { data } = await axios.get(`${process.env.API_URL}/users`);
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
             setResults(data);
           }}
         >
