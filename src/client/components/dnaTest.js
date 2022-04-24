@@ -83,7 +83,7 @@ export default function DNATest() {
           onClick={
             isDNA
               ? async () => {
-                  await axios.post(`/api/user`, {
+                  await axios.post(`http://localhost:4000/users`, {
                     date: date,
                     name: name,
                     dna: dna,
@@ -105,8 +105,8 @@ export default function DNATest() {
         <button
           className="border-2 border-black"
           onClick={async () => {
-            const { data } = await axios.get(`/api/user`);
-            setResults(data.results);
+            const { data } = await axios.get(`http://localhost:4000/users`);
+            setResults(data);
           }}
         >
           Load Data

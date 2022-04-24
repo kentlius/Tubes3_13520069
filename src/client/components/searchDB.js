@@ -8,8 +8,9 @@ export default function SearchDB() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`api/user`);
-        setResults(data.results);
+        const { data } = await axios.get(`http://localhost:4000/users`);
+        setResults(data);
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -46,7 +47,7 @@ export default function SearchDB() {
           ) : (
             results
               ?.filter((val) => {
-                if (query.length < 3) {
+                if (query.length == 0) {
                   return;
                 } else if (
                   val.name.toLowerCase().includes(query.toLowerCase())
