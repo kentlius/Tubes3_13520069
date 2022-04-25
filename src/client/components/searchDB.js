@@ -8,7 +8,9 @@ export default function SearchDB() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+        const { data } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/users`
+        );
         setResults(data);
       } catch (error) {
         console.log(error);
@@ -49,7 +51,10 @@ export default function SearchDB() {
                 if (query.length == 0) {
                   return;
                 } else if (
-                  val.name.toLowerCase().includes(query.toLowerCase())
+                  val.name.toLowerCase().includes(query.toLowerCase()) ||
+                  val.date.toLowerCase().includes(query.toLowerCase()) ||
+                  val.prediction.toLowerCase().includes(query.toLowerCase()) ||
+                  val.isSick.toString().toLowerCase().includes(query.toLowerCase())
                 ) {
                   return val;
                 }
