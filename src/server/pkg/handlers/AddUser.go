@@ -20,8 +20,13 @@ func (h handler) AddUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var user models.User
+	var Sicknesses []models.Sickness
 	json.Unmarshal(body, &user)
-	dnaPenyakit := "CGGGCGCTTTCGCGCGHHHH"
+	if result := h.DB.Select("dna").Where("name = ?", user.Prediction).First(&Sicknesses); result.Error != nil {
+		fmt.Println(result.Error)
+	}
+	fmt.Println(Sicknesses)
+	dnaPenyakit := Sicknesses[0].DNA
 	if BooyerMoore(dnaPenyakit, user.DNA) {
 		user.IsSick = true
 		user.Percentage = 100
