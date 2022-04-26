@@ -8,15 +8,26 @@ export default function AddSickness() {
   const [isDNA, setIsDNA] = useState(false);
 
   return (
-    <div className="py-0 px-8">
-      <main className="flex flex-col justify-center flex-1 min-h-screen py-16 px-0">
-        <h1 className="text-3xl m-0 text-center">Add Sickness</h1>
-
-        <div className="flex justify-center flex-wrap my-3 gap-4">
+    <div className="py-0 px-48 bg-[#BBE3ED]">
+      <main className="flex flex-col flex-1 min-h-screen py-16 px-0">
+        <div className="flex flex-wrap justify-between">
+          <h1 className="text-3xl m-0 text-center text-[#385166] font-semibold">
+            Add Sickness
+          </h1>
+          <div className="flex">
+            <button className="px-12 py-2 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md">
+              <a href="/">Back</a>
+            </button>
+          </div>
+        </div>
+        <p>
+          You can add new sickness by inputting the name and the DNA file below.
+        </p>
+        <div className="flex flex-wrap my-6 gap-4">
           <div className="">
-            <p>Sickness Name:</p>
+            <p className="font-medium">Sickness Name</p>
             <input
-              className="border-2 border-black px-1"
+              className="px-3 h-10 drop-shadow-md rounded-[42px]"
               value={sickness}
               type="text"
               name="sickness"
@@ -27,8 +38,9 @@ export default function AddSickness() {
           </div>
 
           <div className="">
-            <p>Sequence DNA:</p>
+            <p className="font-medium">Sequence DNA</p>
             <input
+              className="drop-shadow-md rounded-xl"
               type="file"
               name="dna"
               accept=".txt"
@@ -49,9 +61,10 @@ export default function AddSickness() {
             />
           </div>
         </div>
-        <div className="flex justify-center">
+        <p>Double check the name and the file, then press submit to continue</p>
+        <div className="flex">
           <button
-            className="border-2 border-black w-fit px-2"
+            className="px-12 py-2 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md"
             onClick={
               isDNA
                 ? async () => {
