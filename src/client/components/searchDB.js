@@ -20,21 +20,25 @@ export default function SearchDB() {
   }, []);
 
   return (
-    <div className="py-0 px-[2rem]">
-      <main className="flex flex-col items-center justify-center flex-1 min-h-screen py-[4rem] px-0">
-        <button className="border-2 border-black">
-          <a href="/sickness">Add Sickness</a>
-        </button>
-        <button className="border-2 border-black">
-          <a href="/test">Test DNA</a>
-        </button>
-        <h1 className="text-3xl m-0 text-center">Search Database</h1>
-        <div className="search">
+    <div className="py-0 px-8">
+      <main className="flex flex-col flex-1 min-h-screen py-16 px-0">
+        <div className="flex flex-wrap justify-around">
+          <h1 className="text-3xl m-0 text-center">Search Database</h1>
+          <div className="flex">
+            <button className="border-2 border-black mx-2 p-1">
+              <a href="/sickness">Add Sickness</a>
+            </button>
+            <button className="border-2 border-black p-1">
+              <a href="/test">Test DNA</a>
+            </button>
+          </div>
+        </div>
+        <div className="flex justify-center">
           <input
             type="text"
             name="query"
             placeholder="Search user"
-            className="border-2 border-black m-3"
+            className="p-1 border-2 border-black my-3 w-9/12"
             onChange={(e) => setQuery(e.target.value)}
             value={query}
           />
@@ -54,7 +58,10 @@ export default function SearchDB() {
                   val.name.toLowerCase().includes(query.toLowerCase()) ||
                   val.date.toLowerCase().includes(query.toLowerCase()) ||
                   val.prediction.toLowerCase().includes(query.toLowerCase()) ||
-                  val.isSick.toString().toLowerCase().includes(query.toLowerCase())
+                  val.isSick
+                    .toString()
+                    .toLowerCase()
+                    .includes(query.toLowerCase())
                 ) {
                   return val;
                 }

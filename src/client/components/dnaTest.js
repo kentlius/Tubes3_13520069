@@ -15,71 +15,80 @@ export default function DNATest() {
   const [isDNA, setIsDNA] = useState(false);
 
   return (
-    <div className="py-0 px-[2rem]">
-      <main className="flex flex-col items-center justify-center flex-1 min-h-screen py-[4rem] px-0">
+    <div className="py-0 px-8">
+      <main className="flex flex-col justify-center flex-1 min-h-screen py-[4rem] px-0">
         <h1 className="text-3xl m-0 text-center">DNA Test</h1>
-        <div>
-          <p>Full Name:</p>
-          <input
-            className="border-2 border-black"
-            value={name}
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+        <div className="flex justify-around my-2 flex-wrap">
+          <div>
+            <p>Full Name:</p>
+            <input
+              className="border-2 border-black"
+              value={name}
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <p>Sequence DNA:</p>
+            <input
+              type="file"
+              name="dna"
+              accept=".txt"
+              onChange={(e) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                  if (RegExp(/^[ATCG]+$/).test(e.target.result)) {
+                    setIsDNA(true);
+                    setDna(e.target.result);
+                  } else {
+                    setIsDNA(false);
+                    alert("File must be in DNA format");
+                  }
+                };
+                reader.readAsText(e.target.files[0]);
+              }}
+              required
+            />
+          </div>
+          <div>
+            <p>Sickness Prediction:</p>
+            <input
+              className="border-2 border-black"
+              value={prediction}
+              type="text"
+              name="prediction"
+              placeholder="Sickness Prediction"
+              onChange={(e) => setPrediction(e.target.value)}
+              required
+            />
+          </div>
         </div>
-        <div>
-          <p>Sequence DNA:</p>
-          <input
-            type="file"
-            name="dna"
-            accept=".txt"
-            onChange={(e) => {
-              const reader = new FileReader();
-              reader.onload = (e) => {
-                if (RegExp(/^[ATCG]+$/).test(e.target.result)) {
-                  setIsDNA(true);
-                  setDna(e.target.result);
-                } else {
-                  setIsDNA(false);
-                  alert("File must be in DNA format");
-                }
-              };
-              reader.readAsText(e.target.files[0]);
-            }}
-            required
-          />
+        <div className="flex justify-center gap-3">
+          <div>
+            <input
+              type="radio"
+              name="method"
+              value={method}
+              onChange={() => setMethod("Boyer-Moore")}
+            />
+            <label className="mx-1">Booyer-Moore</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="method"
+              value={method}
+              onChange={() => setMethod("Knuth-Morris-Pratt")}
+            />
+            <label className="mx-1">Knuth-Morris-Pratt</label>
+          </div>
         </div>
-        <div>
-          <p>Sickness Prediction:</p>
-          <input
-            className="border-2 border-black"
-            value={prediction}
-            type="text"
-            name="prediction"
-            placeholder="Sickness Prediction"
-            onChange={(e) => setPrediction(e.target.value)}
-            required
-          />
-        </div>
-        <input
-          type="radio"
-          name="method"
-          value={method}
-          onChange={() => setMethod("Boyer-Moore")}
-        />
-        <label>Booyer-Moore</label>
-        <input
-          type="radio"
-          name="method"
-          value={method}
-          onChange={() => setMethod("Knuth-Morris-Pratt")}
-        />
-        <label>Knuth-Morris-Pratt</label>
+        <div className="flex justify-center">
         <button
-          className="border-2 border-black"
+          className="border-2 border-black px-1 m-2"
           onClick={
             isDNA
               ? async () => {
@@ -96,22 +105,25 @@ export default function DNATest() {
         >
           Submit
         </button>
+        </div>
         <div className="border-t-2 border-black border-dashed ">
           <h1 className="text-2xl m-0 text-center">Test Result</h1>
-          <p>
+          <p className="text-center">
             {date} - {name} - {prediction} - {method}
           </p>
         </div>
-        <button
+        {/* <button
           className="border-2 border-black"
           onClick={async () => {
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+            const { data } = await axios.get(
+              `${process.env.NEXT_PUBLIC_API_URL}/users`
+            );
             setResults(data);
           }}
         >
           Load Data
-        </button>
-        <div>
+        </button> */}
+        {/* <div>
           {results.map((result) => {
             return (
               <div key={result.id}>
@@ -120,7 +132,7 @@ export default function DNATest() {
               </div>
             );
           })}
-        </div>
+        </div> */}
       </main>
     </div>
   );
