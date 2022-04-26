@@ -22,11 +22,11 @@ func (h handler) AddUser(w http.ResponseWriter, r *http.Request) {
 	var user models.User
 	json.Unmarshal(body, &user)
 	dnaPenyakit := "CGGGCGCTTTCGCGCGHHHH"
-	if BooyerMoore(user.DNA, dnaPenyakit) {
+	if BooyerMoore(dnaPenyakit, user.DNA) {
 		user.IsSick = true
 		user.Percentage = 100
 	} else {
-		user.Percentage = countSimilarity(user.DNA, dnaPenyakit)
+		user.Percentage = countSimilarity(dnaPenyakit, user.DNA)
 		if user.Percentage >= 80 {
 			user.IsSick = true
 		} else {
