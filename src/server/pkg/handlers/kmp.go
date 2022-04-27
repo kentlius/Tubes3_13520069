@@ -21,7 +21,7 @@ func BorderFunction(pattern string, M int, fail []int) {
 	}
 }
 
-func KMP(pattern string, text string) int { //Return -1 if pattern doesn't exists in text else index where pattern start
+func KMP(pattern string, text string) bool { //Return -1 if pattern doesn't exists in text else index where pattern start
 	n := len(text)
 	m := len(pattern)
 
@@ -35,7 +35,7 @@ func KMP(pattern string, text string) int { //Return -1 if pattern doesn't exist
 	for i < n {
 		if pattern[j] == text[i] {
 			if j == m-1 {
-				return i - m + 1
+				return true
 			}
 			i++
 			j++
@@ -45,5 +45,5 @@ func KMP(pattern string, text string) int { //Return -1 if pattern doesn't exist
 			i++
 		}
 	}
-	return -1
+	return false
 }
