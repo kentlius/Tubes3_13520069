@@ -15,7 +15,7 @@ func GetLastOccurrence(pattern string) [128]int {
 	return lastOccurrence
 }
 
-func BooyerMoore(pattern string, text string) bool {
+func BoyerMoore(pattern string, text string) bool {
 	lastOccurrence := GetLastOccurrence(pattern)
 	n := len(text)
 	m := len(pattern)

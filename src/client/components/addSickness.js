@@ -48,10 +48,9 @@ export default function AddSickness() {
                 const reader = new FileReader();
                 reader.onload = (e) => {
                   if (RegExp(/^[ATCG]+$/).test(e.target.result)) {
-                    setIsDNA(true);
                     setDna(e.target.result);
                   } else {
-                    setIsDNA(false);
+                    setDna(e.target.result);
                     alert("File must be in DNA format");
                   }
                 };
@@ -65,16 +64,15 @@ export default function AddSickness() {
         <div className="flex">
           <button
             className="px-12 py-2 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md"
-            onClick={
-              isDNA
-                ? async () => {
-                    await axios.post(`/api/sickness`, {
-                      name: sickness,
-                      dna: dna,
-                    });
-                  }
-                : () => alert("File must be in DNA format")
-            }
+            onClick={async () => {
+              await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URL}/sicknesses`,
+                {
+                  name: sickness,
+                  dna: dna,
+                }
+              );
+            }}
           >
             Submit
           </button>

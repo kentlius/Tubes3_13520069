@@ -10,7 +10,7 @@ import (
 	"github.com/Tubes3_13520069/src/server/pkg/models"
 )
 
-func (h handler) AddBook(w http.ResponseWriter, r *http.Request) {
+func (h handler) AddSickness(w http.ResponseWriter, r *http.Request) {
 	// Read to request body
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
@@ -19,12 +19,14 @@ func (h handler) AddBook(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(err)
 	}
 
-	var Sicknesses models.Sickness
-	json.Unmarshal(body, &Sicknesses)
+	var sicknesses models.Sickness
+	json.Unmarshal(body, &sicknesses)
 
-	// Append to the Books table
-	if result := h.DB.Create(&Sicknesses); result.Error != nil {
-		fmt.Println(result.Error)
+	if(IsValid(sicknesses.DNA)) {
+		// Append to the Sicknesses table
+		if result := h.DB.Create(&sicknesses); result.Error != nil {
+			fmt.Println(result.Error)
+		}
 	}
 
 	// Send a 201 created response

@@ -24,6 +24,10 @@ func main() {
     router.HandleFunc("/users/{id}", h.UpdateUser).Methods(http.MethodPut)
     router.HandleFunc("/users/{id}", h.DeleteUser).Methods(http.MethodDelete)
 
+    router.HandleFunc("/sicknesses", h.GetAllSicknesses).Methods(http.MethodGet)
+    router.HandleFunc("/sicknesses/{id}", h.GetSickness).Methods(http.MethodGet)
+    router.HandleFunc("/sicknesses", h.AddSickness).Methods(http.MethodPost)
+
     log.Println("API is running!")
     http.ListenAndServe("127.0.0.1:4000", c.Handler(router))
 }

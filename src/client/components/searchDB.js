@@ -10,7 +10,7 @@ export default function SearchDB() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/users`
+          `${process.env.NEXT_PUBLIC_API_URL}/users?query=${query}`
         );
         setResults(data);
       } catch (error) {
@@ -18,7 +18,7 @@ export default function SearchDB() {
       }
     };
     fetchData();
-  }, []);
+  }, [query]);
 
   return (
     <div className="py-0 px-8 bg-[#BBE3ED]">
@@ -55,25 +55,7 @@ export default function SearchDB() {
                 <h1 className="text-2xl m-0 text-center">No Results</h1>
               </div>
             ) : (
-              results
-                ?.filter((val) => {
-                  if (query.length == 0) {
-                    return;
-                  } else if (
-                    val.name.toLowerCase().includes(query.toLowerCase()) ||
-                    val.date.toLowerCase().includes(query.toLowerCase()) ||
-                    val.prediction
-                      .toLowerCase()
-                      .includes(query.toLowerCase()) ||
-                    val.isSick
-                      .toString()
-                      .toLowerCase()
-                      .includes(query.toLowerCase())
-                  ) {
-                    return val;
-                  }
-                })
-                .map((result) => (
+              results?.map((result) => (
                   <div
                     className="border-2 border-black border-dashed"
                     key={result.id}

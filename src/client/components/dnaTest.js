@@ -3,16 +3,11 @@ import axios from "axios";
 
 export default function DNATest() {
   const [results, setResults] = useState([]);
-  const date = new Intl.DateTimeFormat("id-ID", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(new Date());
+  const date = new Intl.DateTimeFormat("id-ID").format(new Date());
   const [name, setName] = useState("");
   const [dna, setDna] = useState("");
   const [prediction, setPrediction] = useState("");
   const [method, setMethod] = useState("Boyer-Moore");
-  const [isDNA, setIsDNA] = useState(false);
 
   return (
     <div className="py-0 px-48 bg-[#BBE3ED]">
@@ -28,7 +23,8 @@ export default function DNATest() {
           </div>
         </div>
         <p>
-        You can test a DNA by inputting the data below and check the result of the test.
+          You can test a DNA by inputting the data below and check the result of
+          the test.
         </p>
         <div className="flex flex-wrap my-6 gap-4">
           <div>
@@ -57,64 +53,56 @@ export default function DNATest() {
           </div>
         </div>
         <div>
-            <p>Sequence DNA</p>
-            <input
-              type="file"
-              name="dna"
-              accept=".txt"
-              onChange={(e) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                  if (RegExp(/^[ATCG]+$/).test(e.target.result)) {
-                    setIsDNA(true);
+          <p>Sequence DNA</p>
+          <input
+            type="file"
+            name="dna"
+            accept=".txt"
+            onChange={(e) => {
+              const reader = new FileReader();
+              reader.onload = (e) => {
+                if (RegExp(/^[ATCG]+$/).test(e.target.result)) {
                     setDna(e.target.result);
                   } else {
-                    setIsDNA(false);
+                    setDna(e.target.result);
                     alert("File must be in DNA format");
                   }
-                };
-                reader.readAsText(e.target.files[0]);
-              }}
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="radio"
-              name="method"
-              value={method}
-              onChange={() => setMethod("Boyer-Moore")}
-            />
-            <label className="mx-1">Booyer-Moore</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              name="method"
-              value={method}
-              onChange={() => setMethod("Knuth-Morris-Pratt")}
-            />
-            <label className="mx-1">Knuth-Morris-Pratt</label>
-          </div>
+              };
+              reader.readAsText(e.target.files[0]);
+            }}
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="method"
+            value={method}
+            onChange={() => setMethod("Boyer-Moore")}
+          />
+          <label className="mx-1">Boyer-Moore</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="method"
+            value={method}
+            onChange={() => setMethod("Knuth-Morris-Pratt")}
+          />
+          <label className="mx-1">Knuth-Morris-Pratt</label>
+        </div>
         <div className="flex m-4">
           <button
             className="px-12 py-2 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md"
-            onClick={
-              isDNA
-                ? async () => {
-                    await axios.post(
-                      `${process.env.NEXT_PUBLIC_API_URL}/users`,
-                      {
-                        date: date,
-                        name: name,
-                        dna: dna,
-                        prediction: prediction,
-                        method: method,
-                      }
-                    );
-                  }
-                : () => alert("File must be in DNA format")
-            }
+            onClick={async () => {
+              await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+                date: date,
+                name: name,
+                dna: dna,
+                prediction: prediction,
+                method: method,
+              });
+            }}
           >
             Submit
           </button>
