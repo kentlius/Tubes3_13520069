@@ -62,11 +62,11 @@ export default function DNATest() {
               const reader = new FileReader();
               reader.onload = (e) => {
                 if (RegExp(/^[ATCG]+$/).test(e.target.result)) {
-                    setDna(e.target.result);
-                  } else {
-                    setDna(e.target.result);
-                    alert("File must be in DNA format");
-                  }
+                  setDna(e.target.result);
+                } else {
+                  setDna(e.target.result);
+                  alert("File must be in DNA format");
+                }
               };
               reader.readAsText(e.target.files[0]);
             }}
@@ -91,7 +91,7 @@ export default function DNATest() {
           />
           <label className="mx-1">Knuth-Morris-Pratt</label>
         </div>
-        <div className="flex m-4">
+        <div className="flex m-4 gap-2">
           <button
             className="px-12 py-2 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md"
             onClick={async () => {
@@ -102,38 +102,35 @@ export default function DNATest() {
                 prediction: prediction,
                 method: method,
               });
+
+              const { data } = axios.get(
+                `${process.env.NEXT_PUBLIC_API_URL}/users`
+              );
+              setResults(data);
             }}
           >
             Submit
+          </button>
+          <button
+            className="px-12 py-2 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md"
+            onClick={async () => {
+              const { data } = await axios.get(
+                `${process.env.NEXT_PUBLIC_API_URL}/users`
+              );
+              setResults(data);
+              console.log(data);
+            }}
+          >
+            Get Result
           </button>
         </div>
         <h1 className="text-lg m-0">Test Result</h1>
         <div className="border-t-[1px] border-black ">
           <p className="my-4 mx-2">
-            {date} - {name} - {prediction} - {method}
+            {date} - {name} - {prediction} - {method} - {results.length} -{" "}
+            {results.length}
           </p>
         </div>
-        {/* <button
-          className="border-2 border-black"
-          onClick={async () => {
-            const { data } = await axios.get(
-              `${process.env.NEXT_PUBLIC_API_URL}/users`
-            );
-            setResults(data);
-          }}
-        >
-          Load Data
-        </button> */}
-        {/* <div>
-          {results.map((result) => {
-            return (
-              <div key={result.id}>
-                {result.date} - {result.name} - {result.prediction} -{" "}
-                {result.percentage} - {result.isSick.toString()}
-              </div>
-            );
-          })}
-        </div> */}
       </main>
     </div>
   );

@@ -27,7 +27,7 @@ func (h handler) AddUser(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(Sicknesses)
 	dnaPenyakit := Sicknesses[0].DNA
-	if IsValid(user.dna){
+	if IsValid(user.DNA){
 		// dnaPenyakit := "ATCGTCTGA"
 		if user.Method == "Boyer-Moore" {
 			if BoyerMoore(dnaPenyakit, user.DNA) {
