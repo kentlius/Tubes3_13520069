@@ -26,9 +26,9 @@ func (h handler) AddUser(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(result.Error)
 	}
 	fmt.Println(Sicknesses)
-	dnaPenyakit := Sicknesses[0].DNA
-	if IsValid(user.DNA){
+	if IsValid(user.DNA) && len(Sicknesses) > 0 {
 		// dnaPenyakit := "ATCGTCTGA"
+		dnaPenyakit := Sicknesses[0].DNA
 		if user.Method == "Boyer-Moore" {
 			if BoyerMoore(dnaPenyakit, user.DNA) {
 				user.IsSick = true
@@ -55,8 +55,8 @@ func (h handler) AddUser(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 
-		
 		// Append to the Users table
+		user.Percentage = -1
 		if result := h.DB.Create(&user); result.Error != nil {
 			fmt.Println(result.Error)
 		}
