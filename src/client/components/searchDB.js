@@ -28,12 +28,18 @@ export default function SearchDB() {
             Search Database
           </h1>
           <div className="flex">
-            <button className="mx-2 px-3 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md">
-              <a href="/sickness">Add Sickness</a>
-            </button>
-            <button className="px-3 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md">
-              <a href="/test">Test DNA</a>
-            </button>
+            <a
+              href="/sickness"
+              className="mx-2 py-2 px-3 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md"
+            >
+              Add Sickness
+            </a>
+            <a
+              href="/test"
+              className="mx-2 py-2 px-3 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md"
+            >
+              Test DNA
+            </a>
           </div>
         </div>
         <div className="flex flex-col w-9/12 bg-white drop-shadow-md rounded-[42px] my-3">
@@ -56,14 +62,14 @@ export default function SearchDB() {
               </div>
             ) : (
               results?.map((result) => (
-                  <div
-                    className="border-2 border-black border-dashed"
-                    key={result.id}
-                  >
-                    {result.date} - {result.name} - {result.prediction} -{" "}
-                    {result.percentage}% - {result.isSick.toString()}
-                  </div>
-                ))
+                <div
+                  className="border-2 border-black border-dashed"
+                  key={result.id}
+                >
+                  {result.date} - {result.name} - {result.prediction} -{" "}
+                  {result.percentage}% - {result.isSick.toString()}
+                </div>
+              ))
             )}
           </div>
         </div>

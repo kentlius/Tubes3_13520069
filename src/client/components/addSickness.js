@@ -13,9 +13,12 @@ export default function AddSickness() {
             Add Sickness
           </h1>
           <div className="flex">
-            <button className="px-12 py-2 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md">
-              <a href="/">Back</a>
-            </button>
+            <a
+              href="/"
+              className="py-2 px-12 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md"
+            >
+              Back
+            </a>
           </div>
         </div>
         <p>
