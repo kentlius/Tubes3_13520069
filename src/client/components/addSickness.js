@@ -2,14 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function AddSickness() {
-  const [results, setResults] = useState([]);
   const [sickness, setSickness] = useState("");
   const [dna, setDna] = useState("");
-  const [isDNA, setIsDNA] = useState(false);
 
   return (
-    <div className="py-0 px-48 bg-[#BBE3ED]">
-      <main className="flex flex-col flex-1 min-h-screen py-16 px-0">
+    <div className="py-0 px-48 bg-[#BBE3ED] flex justify-center">
+      <main className="flex flex-col flex-1 min-h-screen py-16 px-0 max-w-screen-xl">
         <div className="flex flex-wrap justify-between">
           <h1 className="text-3xl m-0 text-center text-[#385166] font-semibold">
             Add Sickness
@@ -40,7 +38,7 @@ export default function AddSickness() {
           <div className="">
             <p className="font-medium">Sequence DNA</p>
             <input
-              className="drop-shadow-md rounded-xl"
+              className="drop-shadow-md"
               type="file"
               name="dna"
               accept=".txt"
@@ -77,24 +75,6 @@ export default function AddSickness() {
             Submit
           </button>
         </div>
-        {/* <button
-          className="border-2 border-black"
-          onClick={async () => {
-            const { data } = await axios.get(`/api/sickness`);
-            setResults(data.results);
-          }}
-        >
-          Load Data
-        </button>
-        <div>
-          {results.map((result) => {
-            return (
-              <div key={result.id}>
-                {result.name} - {result.dna}
-              </div>
-            );
-          })}
-        </div> */}
       </main>
     </div>
   );

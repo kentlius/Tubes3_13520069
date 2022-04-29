@@ -10,8 +10,8 @@ export default function DNATest() {
   const [method, setMethod] = useState("Boyer-Moore");
 
   return (
-    <div className="py-0 px-48 bg-[#BBE3ED]">
-      <main className="flex flex-col flex-1 min-h-screen py-16 px-0">
+    <div className="py-0 px-4 bg-[#BBE3ED] flex justify-center">
+      <main className="flex flex-col flex-1 min-h-screen py-16 px-0 max-w-screen-xl">
         <div className="flex flex-wrap justify-between">
           <h1 className="text-3xl m-0 text-center text-[#385166] font-semibold">
             DNA Test
@@ -91,7 +91,7 @@ export default function DNATest() {
           />
           <label className="mx-1">Knuth-Morris-Pratt</label>
         </div>
-        <div className="flex m-4 gap-2">
+        <div className="flex flex-wrap m-4 gap-2">
           <button
             className="px-12 py-2 bg-[#35C5CE] rounded-3xl text-[#ffffff] drop-shadow-md"
             onClick={async () => {
@@ -102,11 +102,6 @@ export default function DNATest() {
                 prediction: prediction,
                 method: method,
               });
-
-              const { data } = axios.get(
-                `${process.env.NEXT_PUBLIC_API_URL}/users`
-              );
-              setResults(data);
             }}
           >
             Submit
@@ -117,18 +112,18 @@ export default function DNATest() {
               const { data } = await axios.get(
                 `${process.env.NEXT_PUBLIC_API_URL}/users`
               );
-              setResults(data);
-              console.log(data);
+              setResults(data.pop());
             }}
           >
-            Get Result
+            Get Latest Result
           </button>
         </div>
         <h1 className="text-lg m-0">Test Result</h1>
         <div className="border-t-[1px] border-black ">
           <p className="my-4 mx-2">
-            {date} - {name} - {prediction} - {method} - {results.length} -{" "}
-            {results.length}
+            {results.date} - {results.name} - {results.prediction} -{" "}
+            {results.method} - {results.percentage}% -{" "}
+            {JSON.stringify(results.isSick)}
           </p>
         </div>
       </main>
