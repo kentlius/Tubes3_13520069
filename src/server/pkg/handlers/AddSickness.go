@@ -20,11 +20,20 @@ func (h handler) AddSickness(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var sicknesses models.Sickness
+	var sicknesses2 []models.Sickness
 	json.Unmarshal(body, &sicknesses)
 
-	if(IsValid(sicknesses.DNA)) {
+	if result := h.DB.Select("dna").Where("name = ?", sicknesses.Name).First(&sicknesses2); result.Error != nil {
+		fmt.Println(result.Error)
+	}
+	fmt.Println(sicknesses2)
+	if IsValid(sicknesses.DNA) && len(sicknesses2) == 0 {
 		// Append to the Sicknesses table
 		if result := h.DB.Create(&sicknesses); result.Error != nil {
+			fmt.Println(result.Error)
+		}
+	} else if len(sicknesses2) > 0 {
+		if result := h.DB.Model(&sicknesses).Where("name = ?", sicknesses.Name).Update("dna", sicknesses.DNA); result.Error != nil {
 			fmt.Println(result.Error)
 		}
 	}

@@ -26,39 +26,39 @@ func (h handler) AddUser(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(result.Error)
 	}
 	fmt.Println(Sicknesses)
-	if IsValid(user.DNA) && len(Sicknesses) > 0 {
-		// dnaPenyakit := "ATCGTCTGA"
-		dnaPenyakit := Sicknesses[0].DNA
-		if user.Method == "Boyer-Moore" {
-			if BoyerMoore(dnaPenyakit, user.DNA) {
-				user.IsSick = true
-				user.Percentage = 100
-			} else {
-				user.Percentage = countSimilarity(dnaPenyakit, user.DNA)
-				if user.Percentage >= 80 {
+	if IsValid(user.DNA) {
+		if len(Sicknesses) > 0 {
+			// dnaPenyakit := "ATCGTCTGA"
+			dnaPenyakit := Sicknesses[0].DNA
+			if user.Method == "Boyer-Moore" {
+				if BoyerMoore(dnaPenyakit, user.DNA) {
 					user.IsSick = true
+					user.Percentage = 100
 				} else {
-					user.IsSick = false
+					user.Percentage = countSimilarity(dnaPenyakit, user.DNA)
+					if user.Percentage >= 80 {
+						user.IsSick = true
+					} else {
+						user.IsSick = false
+					}
+				}
+			} else if user.Method == "Knuth-Morris-Pratt" {
+				if KMP(dnaPenyakit, user.DNA) {
+					user.IsSick = true
+					user.Percentage = 100
+				} else {
+					user.Percentage = countSimilarity(dnaPenyakit, user.DNA)
+					if user.Percentage >= 80 {
+						user.IsSick = true
+					} else {
+						user.IsSick = false
+					}
 				}
 			}
-		} else if user.Method == "Knuth-Morris-Pratt" {
-			if KMP(dnaPenyakit, user.DNA) {
-				user.IsSick = true
-				user.Percentage = 100
-			} else {
-				user.Percentage = countSimilarity(dnaPenyakit, user.DNA)
-				if user.Percentage >= 80 {
-					user.IsSick = true
-				} else {
-					user.IsSick = false
-				}
-			}
-		}
-
-		// Append to the Users table
-		if len(Sicknesses) == 0 {
+		} else {
 			user.Percentage = -1
 		}
+		// Append to the Users table
 		if result := h.DB.Create(&user); result.Error != nil {
 			fmt.Println(result.Error)
 		}
