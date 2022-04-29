@@ -19,13 +19,9 @@ func main() {
 	})
 
     router.HandleFunc("/users", h.GetAllUsers).Methods(http.MethodGet)
-    router.HandleFunc("/users/{id}", h.GetUser).Methods(http.MethodGet)
     router.HandleFunc("/users", h.AddUser).Methods(http.MethodPost)
-    router.HandleFunc("/users/{id}", h.UpdateUser).Methods(http.MethodPut)
-    router.HandleFunc("/users/{id}", h.DeleteUser).Methods(http.MethodDelete)
 
     router.HandleFunc("/sicknesses", h.GetAllSicknesses).Methods(http.MethodGet)
-    router.HandleFunc("/sicknesses/{id}", h.GetSickness).Methods(http.MethodGet)
     router.HandleFunc("/sicknesses", h.AddSickness).Methods(http.MethodPost)
 
     log.Println("API is running!")
