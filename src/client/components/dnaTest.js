@@ -125,6 +125,13 @@ export default function DNATest() {
             {results.method} - {results.percentage}% -{" "}
             {JSON.stringify(results.isSick)}
           </p>
+          {results.percentage === -1 ? (
+            <p className="my-4 mx-2">
+              Sickness not found in our database. Please try another prediction.
+            </p>
+          ) : (
+            ""
+          )}
         </div>
       </main>
     </div>
