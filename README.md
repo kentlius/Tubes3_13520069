@@ -7,14 +7,12 @@
 
 - [Tugas Besar III IF2211 Strategi Algoritma](#tugas-besar-iii-if2211-strategi-algoritma)
   - [Table of Contents](#table-of-contents)
-  - [General Information](#general-information)
   - [Technologies Used](#technologies-used)
   - [Features](#features)
+  - [Screenshots](#screenshots)
   - [Setup](#setup)
   - [Usage](#usage)
   - [Author](#author)
-
-## General Information
 
 ## Technologies Used
 
@@ -29,11 +27,18 @@
 - Aplikasi memiliki halaman yang menampilkan urutan hasil prediksi dengan kolom pencarian di dalamnya. Kolom pencarian bekerja sebagai filter dalam menampilkan hasil.
 - (Bonus) Menghitung tingkat kemiripan DNA pengguna dengan DNA penyakit pada tes DNA.
 
-<!-- ## Screenshots
+## Screenshots
 
-![Example screenshot](./img/screenshot.png) -->
+![screenshot](screenshot.png)
+![screenshot2](screenshot2.png)
+![screenshot3](screenshot3.png)
 
 ## Setup
+
+```sh
+git clone https://github.com/kentlius/Tubes3_13520069.git
+cd Tubes3_13520069
+```
 
 - Frontend
 
@@ -46,6 +51,10 @@
   ```
 
 - Backend
+
+  ```sh
+  go get .
+  ```
 
   ```sh
   cd src/server
