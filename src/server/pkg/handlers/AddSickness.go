@@ -32,7 +32,7 @@ func (h handler) AddSickness(w http.ResponseWriter, r *http.Request) {
 		if result := h.DB.Create(&sicknesses); result.Error != nil {
 			fmt.Println(result.Error)
 		}
-	} else if len(sicknesses2) > 0 {
+	} else if IsValid(sicknesses.DNA) && len(sicknesses2) > 0 {
 		if result := h.DB.Model(&sicknesses).Where("name = ?", sicknesses.Name).Update("dna", sicknesses.DNA); result.Error != nil {
 			fmt.Println(result.Error)
 		}
